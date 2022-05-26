@@ -67,11 +67,11 @@ public class Steganography {
         Picture s = new Picture(source);
 
         Pixel[][] p1 = s.getPixels2D();
-        Pixel[][] p2 = s.getPixels2D();
+        Pixel[][] p2 = secret.getPixels2D();
 
         for(int r = 0; r < p1.length; r++){
             for (int c = 0; c < p1[0].length; c++){
-               setLow(p2[r][c], p2[r][c].getColor());
+               setLow(p1[r][c], p2[r][c].getColor());
             }
         }
         return s;
