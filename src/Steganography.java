@@ -52,18 +52,50 @@ public class Steganography {
         return copy;
     }
 
+    public static boolean canHide(Picture source, Picture secret){
+        if(source.getHeight() != secret.getHeight()){
+            return false;
+        }
+        if(source.getWidth() != source.getWidth()){
+            return false;
+        }
+        return true;
+    }
+
+    public static Picture hidePicture(Picture source, Picture secret){
+
+        Picture s = new Picture(source);
+
+        Pixel[][] p1 = s.getPixels2D();
+        Pixel[][] p2 = s.getPixels2D();
+
+        for(int r = 0; r < p1.length; r++){
+            for (int c = 0; c < p1[0].length; c++){
+               setLow(p2[r][c], p2[r][c].getColor());
+            }
+        }
+        return s;
+    }
+
 
     public static void main(String[] args) {
-        Picture beach = new Picture ("beach.jpg");
-        beach.explore();
-        Picture copy= testClearLow(beach);
-        copy.explore();
-        Picture beach2 = new Picture ("beach.jpg");
-        beach2.explore();
-        Picture copy2= testSetLow(beach,Color.PINK);
-        copy2.explore();
-        Picture copy3= revealPicture(copy2);
-        copy3.explore();
+//        Picture beach = new Picture ("beach.jpg");
+//        beach.explore();
+//        Picture copy= testClearLow(beach);
+//        copy.explore();
+//        Picture beach2 = new Picture ("beach.jpg");
+//        beach2.explore();
+//        Picture copy2= testSetLow(beach,Color.PINK);
+//        copy2.explore();
+//        Picture copy3= revealPicture(copy2);
+//        copy3.explore();
+        Picture swan = new Picture("swan.jpg");
+        Picture gorge = new Picture("gorge.jpg");
+        Picture copy4 = hidePicture(swan, gorge);
+        swan.explore();
+        copy4.explore();
+        Picture unhidden = revealPicture(copy4);
+        unhidden.explore();
     }
 
 }
