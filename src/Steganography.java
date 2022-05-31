@@ -77,9 +77,36 @@ public class Steganography {
         return s;
     }
 
+    public static Picture hidePicture(Picture source, Picture secret, int startRow, int startCol){
+
+        Picture s = new Picture(source);
+
+        Pixel[][] p1 = s.getPixels2D();
+        Pixel[][] p2 = secret.getPixels2D();
+
+        System.out.println(p1.length);
+        System.out.println(p1[0].length);
+        System.out.println(p2.length);
+        System.out.println(p2[0].length);
+
+        int secretrow = 0;
+        int secretcol = 0;
+
+        for(int r = 0; r < p1.length; r++){
+            for (int c = 0; c < p1[0].length; c++){
+                if(r >)
+                setLow(p1[r][c], p2[secretrow][secretcol].getColor());
+                secretcol++;
+            }
+            secretrow++;
+            secretcol = 0;
+        }
+        return s;
+    }
+
 
     public static void main(String[] args) {
-//        Picture beach = new Picture ("beach.jpg");
+        Picture beach = new Picture ("beach.jpg");
 //        beach.explore();
 //        Picture copy= testClearLow(beach);
 //        copy.explore();
@@ -89,13 +116,21 @@ public class Steganography {
 //        copy2.explore();
 //        Picture copy3= revealPicture(copy2);
 //        copy3.explore();
-        Picture swan = new Picture("swan.jpg");
-        Picture gorge = new Picture("gorge.jpg");
-        Picture copy4 = hidePicture(swan, gorge);
-        swan.explore();
-        copy4.explore();
-        Picture unhidden = revealPicture(copy4);
-        unhidden.explore();
+//        Picture swan = new Picture("swan.jpg");
+//        Picture gorge = new Picture("gorge.jpg");
+//        Picture copy4 = hidePicture(swan, gorge);
+//        swan.explore();
+//        copy4.explore();
+//        Picture unhidden = revealPicture(copy4);
+//        unhidden.explore();
+        Picture robot = new Picture("robot.jpg");
+//        beach.explore();
+
+        Picture hidden1 = hidePicture(beach, robot, 65, 208);
+//        hidden1.explore();
+
+        Picture unhidden1 = revealPicture(hidden1);
+        unhidden1.explore();
     }
 
 }
